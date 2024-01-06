@@ -4,9 +4,11 @@
 | email               | string  | null: false, unique: true |
 | encrypted_password  | string  | null: false               |
 | nickname            | string  | null: false               |
-| full_name           | string  | null: false               |
-| furigana            | string  | null: false               |
-| birthday            | integer | null: false               |
+| last_name           | string  | null: false               |
+| first_name          | string  | null: false               |
+| last_name_furigana  | string  | null: false               |
+| first_name_furigana | string  | null: false               |
+| birthday            | date    | null: false               |
 
 ### Association
 - has_many :items
@@ -14,17 +16,15 @@
 
 
 ## itemsテーブル
-| Column             | Type    | Options                        |
-| ------             | ------  | -------------------------      |
-| name               | string  | null: false                    |
-| category           | string  | null: false                    |
-| price              | integer | null: false                    |
-| exhibitor          | string  | null: false, foreign_key: true |
-| item_detail        | text    | null: false                    |
-| item_status        | string  | null: false                    |
-| region             | string  | null: false                    |
-| shipping_due       | string  | null: false                    |
-| shipping_fee       | string  | null: false                    |
+| Column             | Type       | Options                        |
+| ------             | ------     | -------------------------      |
+| name               | string     | null: false                    |
+| category_id        | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
+| item_detail        | text       | null: false                    |
+| item_status_id     | integer    | null: false                    |
+| region_id          | integer    | null: false                    |
 
 ### Association
 - belongs_to :user
@@ -39,17 +39,20 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :items
+- belongs_to :item
 - has_one :region
 
 
 ## regionテーブル
-| Column             | Type    | Options                   |
-| ------             | ------  | ------------------------- |
-| user               | string  | null: false, unique: true |
-| user_address       | text    | null: false               |
-| phone_number       | integer | null: false               |
+| Column             | Type       | Options                        |
+| ------             | ------     | -------------------------      |
+| user               | references | null: false, foreign_key: true |
+| post_code          | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| city               | string     | null: false                    | 
+| house_number       | string     | null: false                    | 
+| building           | string     |                                | 
+| phone_number       | integer    | null: false                    |
 
 ### Association
-- belongs_to :user
-- belongs_to :item
+- belongs_to :order
