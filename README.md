@@ -1,24 +1,60 @@
-# README
+## usersテーブル
+| Column              | Type    | Options                   |
+| ------              | ------  | ------------------------- |
+| email               | string  | null: false, unique: true |
+| encrypted_password  | string  | null: false               |
+| nickname            | string  | null: false               |
+| last_name           | string  | null: false               |
+| first_name          | string  | null: false               |
+| last_name_furigana  | string  | null: false               |
+| first_name_furigana | string  | null: false               |
+| birthday            | date    | null: false               |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Association
+- has_many :items
+- has_many :orders
 
-Things you may want to cover:
 
-* Ruby version
+## itemsテーブル
+| Column          | Type       | Options                        |
+| ------          | ------     | -------------------------      |
+| name            | string     | null: false                    |
+| user            | references | null: false, foreign_key: true |
+| category_id     | integer    | null: false                    |
+| item_status_id  | integer    | null: false                    |
+| price           | integer    | null: false                    |
+| item_detail     | text       | null: false                    |
+| region_id       | integer    | null: false                    |
+| shipping_day_id | integer    | null: false                    |
+| shipping_fee_id | integer    | null: false                    |
 
-* System dependencies
+### Association
+- belongs_to :user
+- has_one :order
 
-* Configuration
 
-* Database creation
+## ordersテーブル
+| Column | Type       | Options                        |
+| ------ | ------     | -------------------------      |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :region
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## regionテーブル
+| Column        | Type       | Options                        |
+| ------        | ------     | -------------------------      |
+| order         | references | null: false, foreign_key: true |
+| post_code     | string     | null: false                    |
+| region_id     | integer    | null: false                    |
+| city          | string     | null: false                    | 
+| house_number  | string     | null: false                    | 
+| building      | string     |                                | 
+| phone_number  | string     | null: false                    |
 
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :order
