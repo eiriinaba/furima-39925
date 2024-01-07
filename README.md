@@ -26,6 +26,7 @@
 | item_detail     | text       | null: false                    |
 | region_id       | integer    | null: false                    |
 | shipping_day_id | integer    | null: false                    |
+| shipping_fee_id | integer    | null: false                    |
 
 ### Association
 - belongs_to :user
@@ -47,9 +48,9 @@
 ## regionテーブル
 | Column        | Type       | Options                        |
 | ------        | ------     | -------------------------      |
-| orders        | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 | post_code     | string     | null: false                    |
-| prefecture_id | integer    | null: false                    |
+| region_id     | integer    | null: false                    |
 | city          | string     | null: false                    | 
 | house_number  | string     | null: false                    | 
 | building      | string     |                                | 
