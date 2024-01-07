@@ -16,15 +16,16 @@
 
 
 ## itemsテーブル
-| Column             | Type       | Options                        |
-| ------             | ------     | -------------------------      |
-| name               | string     | null: false                    |
-| category_id        | integer    | null: false                    |
-| price              | integer    | null: false                    |
-| user               | references | null: false, foreign_key: true |
-| item_detail        | text       | null: false                    |
-| item_status_id     | integer    | null: false                    |
-| region_id          | integer    | null: false                    |
+| Column          | Type       | Options                        |
+| ------          | ------     | -------------------------      |
+| name            | string     | null: false                    |
+| user            | references | null: false, foreign_key: true |
+| category_id     | integer    | null: false                    |
+| item_status_id  | integer    | null: false                    |
+| price           | integer    | null: false                    |
+| item_detail     | text       | null: false                    |
+| region_id       | integer    | null: false                    |
+| shipping_day_id | integer    | null: false                    |
 
 ### Association
 - belongs_to :user
@@ -32,10 +33,10 @@
 
 
 ## ordersテーブル
-| Column             | Type   | Options                   |
-| ------             | ------ | ------------------------- |
-| user               | string | null: false, unique: true |
-| item               | text   | null: false               |
+| Column | Type       | Options                        |
+| ------ | ------     | -------------------------      |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -44,15 +45,15 @@
 
 
 ## regionテーブル
-| Column             | Type       | Options                        |
-| ------             | ------     | -------------------------      |
-| user               | references | null: false, foreign_key: true |
-| post_code          | integer    | null: false                    |
-| prefecture_id      | integer    | null: false                    |
-| city               | string     | null: false                    | 
-| house_number       | string     | null: false                    | 
-| building           | string     |                                | 
-| phone_number       | integer    | null: false                    |
+| Column        | Type       | Options                        |
+| ------        | ------     | -------------------------      |
+| orders        | references | null: false, foreign_key: true |
+| post_code     | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    | 
+| house_number  | string     | null: false                    | 
+| building      | string     |                                | 
+| phone_number  | string     | null: false                    |
 
 ### Association
 - belongs_to :order
