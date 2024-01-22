@@ -9,9 +9,10 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :name, :item_detail, presence: true
-  validates :user, presence: true
+  validates :image, presence: true
+  validates :name, presence: true, length: { maximum: 40 }
+  validates :item_detail, presence: true, length: { maximum: 1000 }
   validates :category_id, :item_status_id, :region_id, :shipping_day_id, :shipping_fee_id, numericality: { other_than: 1 } 
-  validates :price, presence: true, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
 end
