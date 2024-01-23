@@ -4,7 +4,7 @@ function count (){
   itemPrice.addEventListener("input", () => {
     const price = parseFloat(itemPrice.value);
 
-    const itemFeeValue = price * 0.1;
+    const itemFeeValue = Math.floor(price * 0.1);
     const itemProfitValue = price - itemFeeValue;
 
     const itemFee = document.getElementById("add-tax-price");
