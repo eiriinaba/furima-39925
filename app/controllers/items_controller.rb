@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      redirect_to new_user_session_path, notice: 'ログインが必要です。'
+      render :new, status: :unprocessable_entity
     end
   end
 
