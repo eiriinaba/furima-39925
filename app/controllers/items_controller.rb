@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
-  # def index
+  def index
     # @items = Item.all
-  # end
+  end
 
   def new
-      @item = Item.new
+    @item = Item.new
   end
 
   def create
@@ -14,11 +14,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      if user_signed_in?
-        render :new, status: :unprocessable_entity
-      else
-        redirect_to new_user_session_path, notice: 'ログインが必要です。'
-      end
+      redirect_to new_user_session_path, notice: 'ログインが必要です。'
     end
   end
 
