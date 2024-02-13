@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe OrderAddress, type: :model do
   describe '購入処理' do
     before do
-      @order_address = FactoryBot.build(:order_address)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
     end
 
     context '購入ができるとき' do
@@ -95,6 +97,25 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid. Must be 10 or 11 digits")
       end
+
+      it 'tokenが空では購入できない' do
+        @order_address.token = nil
+        expect(@order_address).not_to be_valid
+        expect(@order_address.errors[:token]).to include("can't be blank")
+      end
+  
+      it 'userが紐付いていなければ購入できない' do
+        @order_address.user_id = nil
+        expect(@order_address).not_to be_valid
+        expect(@order_address.errors[:user_id]).to include("can't be blank")
+      end
+  
+      it 'itemが紐付いていなければ購入できない' do
+        @order_address.item_id = nil
+        expect(@order_address).not_to be_valid
+        expect(@order_address.errors[:item_id]).to include("can't be blank")
+      end
+
     end
   end
 end
