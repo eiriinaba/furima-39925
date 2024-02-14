@@ -42,10 +42,10 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :region
+- has_one :address
 
 
-## regionテーブル
+## addressテーブル
 | Column        | Type       | Options                        |
 | ------        | ------     | -------------------------      |
 | order         | references | null: false, foreign_key: true |

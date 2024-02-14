@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
-  before_action :set_item, only: [:show, :edit,:update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update]
 
   def index
@@ -24,6 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if Order.exists?(item_id: @item.id)
+      redirect_to root_path
+    end
   end
 
   def update
